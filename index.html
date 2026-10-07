@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Friends WC 2026 Prediction League</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              900: '#14532d',
+              gold: '#fbbf24',
+              accent: '#38bdf8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .stadium-gradient {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 83, 45, 0.85) 50%, rgba(15, 23, 42, 0.98) 100%),
+                  radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.25), transparent 70%);
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-active {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+    .gold-glow {
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.25);
+    }
+    .pitch-lines {
+      background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 40px);
+    }
+  </style>
+</head>
+<body class="h-full font-sans antialiased bg-slate-950 text-slate-100 flex flex-col justify-between select-none overflow-x-hidden">
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-4 max-w-sm w-11/12">
+    <div id="toast-inner" class="bg-slate-800 border border-brand-500 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold">
+      <span id="toast-icon">✨</span>
+      <span id="toast-msg">Notification message</span>
+    </div>
+  </div>
+
+  <!-- Custom Alert Modal (No default alert windows) -->
+  <div id="modal-overlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden transition-opacity duration-200">
+    <div class="glass-card max-w-sm w-full rounded-3xl p-6 border border-slate-700 shadow-2xl text-center space-y-4">
+      <div id="modal-icon" class="text-4xl">🏆</div>
+      <h3 id="modal-title" class="text-xl font-bold text-white">Title</h3>
+      <p id="modal-body" class="text-slate-300 text-sm leading-relaxed">Description goes here...</p>
+      <button onclick="closeModal()" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold rounded-xl transition">Got it</button>
+    </div>
+  </div>
+
+  <!-- Main Layout Container -->
+  <div class="max-w-md mx-auto w-full flex-1 flex flex-col pb-24 min-h-screen relative pitch-lines">
+    
+    <!-- Top Header Bar -->
+    <header class="stadium-gradient px-5 pt-6 pb-5 rounded-b-3xl border-b border-slate-800 shadow-xl sticky top-0 z-30">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-11 h-11 bg-gradient-to-tr from-brand-600 to-brand-500 rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-brand-500/20 border border-brand-500/40">
+            ⚽
+          </div>
+          <div>
+            <h1 class="text-lg font-extrabold tracking-tight text-white flex items-center gap-1.5">
+              Friends WC 2026
+              <span class="text-[10px] bg-brand-500/20 text-brand-500 border border-brand-500/30 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Group A</span>
+            </h1>
+            <p class="text-xs text-slate-400 font-medium">World Cup Prediction League</p>
+          </div>
+        </div>
+        <button onclick="triggerSimulateMatch()" title="Simulate Match Progress" class="text-xs bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 font-medium px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
+          <span>⚡</span>
+          <span>Simulate</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Screens Container -->
+    <main class="flex-1 px-4 pt-5 space-y-6">
+
+      <!-- ==================== HOME SCREEN ==================== -->
+      <section id="screen-home" class="space-y-5 transition-all duration-300">
+        
+        <!-- Hero Banner with Invite Code -->
+        <div class="glass-card rounded-3xl p-5 relative overflow-hidden shadow-xl border border-brand-500/20">
+          <div class="absolute -right-6 -bottom-6 text-7xl opacity-10 font-black text-brand-500">2026</div>
+          <div class="flex justify-between items-start mb-3">
+            <div>
+              <span class="text-xs font-bold text-brand-500 uppercase tracking-widest">Official League</span>
+              <h2 class="text-xl font-bold text-white">Your Friends League</h2>
+            </div>
+            <span class="bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+              👑 <span id="hero-user-rank">Rank #1</span>
+            </span>
+          </div>
+          <p class="text-slate-300 text-xs leading-relaxed mb-4">
+            Predict precise scores, outsmart your friends, and claim ultimate World Cup bragging rights.
+          </p>
+          
+          <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex items-center justify-between">
+            <div class="text-xs">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Invite Code</span>
+              <b id="invite-code" class="text-brand-500 font-mono tracking-wider text-sm">WC26-FRIENDS</b>
+            </div>
+            <button onclick="copyInviteCode()" class="bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+              <span>📋</span> Copy
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic User Quick Stats -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="glass-card rounded-2xl p-3 text-center border border-slate-800">
+            <span class="text-slate-400 text-[10px] uppercase font-bold block">Players</span>
+            <b id="stat-total-players" class="text-lg font-bold text-white">6</b>
+          </div>
+          <div class="glass-card rounded-2xl p-3 text-center border border-slate-800">
+            <span class="text-slate-400 text-[10px] uppercase font-bold block">Matches</span>
+            <b id="stat-total-matches" class="text-lg font-bold text-white">8</b>
+          </div>
+          <div class="glass-card rounded-2xl p-3 text-center border border-brand-500/30 bg-brand-500/5">
+            <span class="text-brand-500 text-[10px] uppercase font-bold block">Your Pts</span>
+            <b id="stat-user-points" class="text-lg font-black text-brand-500">27</b>
+          </div>
+        </div>
+
+        <!-- Match Countdown & Featured Match Widget -->
+        <div class="glass-card rounded-3xl p-5 border border-slate-800 space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+              Next Match Kickoff
+            </h3>
+            <span id="countdown-timer" class="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-lg border border-amber-400/20">
+              00d : 00h : 00m
+            </span>
+          </div>
+
+          <div id="featured-match-container" class="bg-slate-900/60 rounded-2xl p-4 border border-slate-800/80">
+            <!-- Dynamic featured match rendered here -->
+          </div>
+
+          <button onclick="switchTab('matches')" class="w-full py-3 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-slate-950 font-bold text-sm rounded-xl transition shadow-lg shadow-brand-500/10 flex items-center justify-center gap-2">
+            <span>⚽</span> Make All Predictions
+          </button>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">Recent Activity</h3>
+          <div id="activity-feed" class="space-y-2">
+            <!-- Dynamic activity logs populated via JS -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== MATCHES SCREEN ==================== -->
+      <section id="screen-matches" class="space-y-4 hidden transition-all duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-white">Match Picks</h2>
+            <p class="text-xs text-slate-400">Predict exact scores to score max points</p>
+          </div>
+          <!-- Filter Buttons -->
+          <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+            <button id="filter-all" onclick="filterMatches('all')" class="px-2.5 py-1 rounded-lg font-semibold bg-brand-500 text-slate-950 transition">All</button>
+            <button id="filter-upcoming" onclick="filterMatches('upcoming')" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white transition">Upcoming</button>
+            <button id="filter-completed" onclick="filterMatches('completed')" class="px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white transition">Done</button>
+          </div>
+        </div>
+
+        <!-- Points Scoring Guide Banner -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 flex items-center justify-between text-xs text-slate-300">
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400 text-base">🎯</span>
+            <div><strong class="text-white">Exact Score:</strong> 3 Pts</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-brand-500 text-base">✅</span>
+            <div><strong class="text-white">Winner/Draw:</strong> 1 Pt</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-red-400 text-base">❌</span>
+            <div><strong class="text-white">Wrong:</strong> 0 Pts</div>
+          </div>
+        </div>
+
+        <!-- Match Cards List -->
+        <div id="matchList" class="space-y-4">
+          <!-- Dynamic Match Cards JS Rendered -->
+        </div>
+      </section>
+
+      <!-- ==================== STANDINGS SCREEN ==================== -->
+      <section id="screen-standings" class="space-y-4 hidden transition-all duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-white">Live Leaderboard</h2>
+            <p class="text-xs text-slate-400">Real-time standings among friends</p>
+          </div>
+          <span class="text-xs bg-slate-900 border border-slate-800 px-3 py-1 rounded-xl text-slate-400 font-medium flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Live Updated
+          </span>
+        </div>
+
+        <!-- Standings Table Container -->
+        <div class="glass-card rounded-3xl overflow-hidden border border-slate-800 shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-900/90 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-800 tracking-wider">
+                <tr>
+                  <th class="py-3 px-4 text-center">#</th>
+                  <th class="py-3 px-3">Player</th>
+                  <th class="py-3 px-2 text-center">Exact</th>
+                  <th class="py-3 px-2 text-center">Correct</th>
+                  <th class="py-3 px-4 text-right">Pts</th>
+                </tr>
+              </thead>
+              <tbody id="table" class="divide-y divide-slate-800/60 font-medium">
+                <!-- Dynamic Player Rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Rules Info Box -->
+        <div class="glass-card rounded-2xl p-4 border border-slate-800 text-xs space-y-2">
+          <h4 class="font-bold text-slate-200 flex items-center gap-1">
+            <span>ℹ️</span> Tiebreaker Rules
+          </h4>
+          <p class="text-slate-400 leading-relaxed text-[11px]">
+            1. Total Points &bull; 2. Highest number of Exact Scores predicted &bull; 3. Total correct outcomes (Winner/Draw)
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== PROFILE SCREEN ==================== -->
+      <section id="screen-profile" class="space-y-5 hidden transition-all duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-white">My Profile</h2>
+            <p class="text-xs text-slate-400">Manage stats and prediction preferences</p>
+          </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="glass-card rounded-3xl p-5 border border-slate-800 space-y-4">
+          <div class="flex items-center space-x-4">
+            <div class="relative">
+              <div id="profile-avatar-display" class="w-16 h-16 bg-gradient-to-tr from-brand-600 to-amber-500 rounded-2xl flex items-center justify-center text-3xl shadow-lg border border-white/20">
+                🦁
+              </div>
+            </div>
+            <div class="flex-1 space-y-1">
+              <div class="flex items-center gap-2">
+                <input type="text" id="username-input" class="bg-slate-900/80 border border-slate-700 rounded-xl px-3 py-1.5 text-sm font-bold text-white w-full focus:outline-none focus:border-brand-500" value="Ismail">
+              </div>
+              <p class="text-xs text-slate-400">League Member since June 2026</p>
+            </div>
+          </div>
+
+          <!-- Avatar Emoji Selector -->
+          <div>
+            <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Choose Avatar Emoji</label>
+            <div class="flex gap-2 overflow-x-auto pb-1 hide-scrollbar" id="emoji-picker">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <hr class="border-slate-800">
+
+          <!-- User Quick Breakdown -->
+          <div class="grid grid-cols-2 gap-3 text-center">
+            <div class="bg-slate-900/70 p-3 rounded-2xl border border-slate-800">
+              <span class="text-slate-400 text-[10px] uppercase font-bold block">Current Score</span>
+              <span id="profile-points" class="text-xl font-black text-brand-500">27</span>
+              <span class="text-slate-500 text-[10px] block">Points</span>
+            </div>
+            <div class="bg-slate-900/70 p-3 rounded-2xl border border-slate-800">
+              <span class="text-slate-400 text-[10px] uppercase font-bold block">Exact Scores</span>
+              <span id="profile-exact-count" class="text-xl font-black text-amber-400">5</span>
+              <span class="text-slate-500 text-[10px] block">Matches</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reminders & Notifications -->
+        <div class="glass-card rounded-3xl p-5 border border-slate-800 space-y-4">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <span>🔔</span> Reminder Preferences
+          </h3>
+
+          <div class="space-y-3 text-xs">
+            <label class="flex items-center justify-between p-3 rounded-2xl bg-slate-900/60 border border-slate-800 cursor-pointer">
+              <span class="text-slate-200 font-medium">Remind me before match deadlines</span>
+              <input type="checkbox" id="setting-deadline-reminders" checked class="w-4 h-4 rounded accent-brand-500 cursor-pointer">
+            </label>
+
+            <label class="flex items-center justify-between p-3 rounded-2xl bg-slate-900/60 border border-slate-800 cursor-pointer">
+              <span class="text-slate-200 font-medium">Match result notifications</span>
+              <input type="checkbox" id="setting-result-notifications" checked class="w-4 h-4 rounded accent-brand-500 cursor-pointer">
+            </label>
+
+            <label class="flex items-center justify-between p-3 rounded-2xl bg-slate-900/60 border border-slate-800 cursor-pointer">
+              <span class="text-slate-200 font-medium">Sound effects on score update</span>
+              <input type="checkbox" id="setting-sound-effects" checked class="w-4 h-4 rounded accent-brand-500 cursor-pointer">
+            </label>
+          </div>
+
+          <button onclick="saveProfileSettings()" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-sm rounded-xl transition shadow-lg shadow-brand-500/10">
+            Save Settings
+          </button>
+        </div>
+
+        <!-- Reset Demo Data -->
+        <div class="text-center pt-2">
+          <button onclick="resetDataToDefaults()" class="text-xs text-rose-400/70 hover:text-rose-400 font-medium underline">
+            Reset All Demo Data
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-slate-900/90 backdrop-blur-xl border-t border-slate-800/80 px-4 py-2 z-40 rounded-t-3xl shadow-2xl">
+      <div class="flex justify-around items-center">
+        <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center py-1.5 px-3 rounded-2xl text-brand-500 transition">
+          <span class="text-xl">🏠</span>
+          <span class="text-[10px] font-bold tracking-tight mt-0.5">Home</span>
+        </button>
+        <button onclick="switchTab('matches')" id="nav-matches" class="nav-btn flex flex-col items-center py-1.5 px-3 rounded-2xl text-slate-400 hover:text-white transition">
+          <span class="text-xl">⚽</span>
+          <span class="text-[10px] font-bold tracking-tight mt-0.5">Matches</span>
+        </button>
+        <button onclick="switchTab('standings')" id="nav-standings" class="nav-btn flex flex-col items-center py-1.5 px-3 rounded-2xl text-slate-400 hover:text-white transition">
+          <span class="text-xl">🏆</span>
+          <span class="text-[10px] font-bold tracking-tight mt-0.5">Standings</span>
+        </button>
+        <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn flex flex-col items-center py-1.5 px-3 rounded-2xl text-slate-400 hover:text-white transition">
+          <span class="text-xl">👤</span>
+          <span class="text-[10px] font-bold tracking-tight mt-0.5">Profile</span>
+        </button>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // --- Initial Application State & Data ---
+    const DEFAULT_PLAYERS = [
+      { id: 'user', name: 'Ismail', avatar: '🦁', isUser: true },
+      { id: 'alex', name: 'Alex M.', avatar: '⚡', isUser: false },
+      { id: 'sarah', name: 'Sarah K.', avatar: '🎯', isUser: false },
+      { id: 'omar', name: 'Omar H.', avatar: '🔥', isUser: false },
+      { id: 'mateo', name: 'Mateo R.', avatar: '🌟', isUser: false },
+      { id: 'elena', name: 'Elena V.', avatar: '🚀', isUser: false }
+    ];
+
+    const EMOJI_OPTIONS = ['🦁', '⚡', '🎯', '🔥', '🌟', '🚀', '⚽', '🏆', '👑', '🦅'];
+
+    // World Cup 2026 Sample Matches
+    const DEFAULT_MATCHES = [
+      {
+        id: 101,
+        homeTeam: 'Mexico',
+        homeFlag: '🇲🇽',
+        awayTeam: 'South Africa',
+        awayFlag: '🇿🇦',
+        date: 'Jun 11, 2026 - 18:00',
+        timestamp: Date.now() + 100000000,
+        status: 'UPCOMING', // UPCOMING, LIVE, COMPLETED
+        homeActual: null,
+        awayActual: null,
+        matchday: 'Group Stage • Day 1'
+      },
+      {
+        id: 102,
+        homeTeam: 'USA',
+        homeFlag: '🇺🇸',
+        awayTeam: 'Serbia',
+        awayFlag: '🇷🇸',
+        date: 'Jun 12, 2026 - 21:00',
+        timestamp: Date.now() + 180000000,
+        status: 'UPCOMING',
+        homeActual: null,
+        awayActual: null,
+        matchday: 'Group Stage • Day 1'
+      },
+      {
+        id: 103,
+        homeTeam: 'Canada',
+        homeFlag: '🇨🇦',
+        awayTeam: 'Nigeria',
+        awayFlag: '🇳🇬',
+        date: 'Jun 12, 2026 - 15:00',
+        timestamp: Date.now() + 150000000,
+        status: 'UPCOMING',
+        homeActual: null,
+        awayActual: null,
+        matchday: 'Group Stage • Day 1'
+      },
+      {
+        id: 100,
+        homeTeam: 'Brazil',
+        homeFlag: '🇧🇷',
+        awayTeam: 'Croatia',
+        awayFlag: '🇭🇷',
+        date: 'Jun 10, 2026 - 20:00',
+        timestamp: Date.now() - 86400000,
+        status: 'COMPLETED',
+        homeActual: 2,
+        awayActual: 1,
+        matchday: 'Group Stage • Opening'
+      },
+      {
+        id: 99,
+        homeTeam: 'Argentina',
+        homeFlag: '🇦🇷',
+        awayTeam: 'Morocco',
+        awayFlag: '🇲🇦',
+        date: 'Jun 10, 2026 - 17:00',
+        timestamp: Date.now() - 172800000,
+        status: 'COMPLETED',
+        homeActual: 3,
+        awayActual: 1,
+        matchday: 'Group Stage • Opening'
+      },
+      {
+        id: 98,
+        homeTeam: 'Spain',
+        homeFlag: '🇪🇸',
+        awayTeam: 'Japan',
+        awayFlag: '🇯🇵',
+        date: 'Jun 09, 2026 - 20:00',
+        timestamp: Date.now() - 259200000,
+        status: 'COMPLETED',
+        homeActual: 2,
+        awayActual: 2,
+        matchday: 'Group Stage • Preview'
+      },
+      {
+        id: 97,
+        homeTeam: 'France',
+        homeFlag: '🇫🇷',
+        awayTeam: 'Australia',
+        awayFlag: '🇦🇺',
+        date: 'Jun 09, 2026 - 16:00',
+        timestamp: Date.now() - 345600000,
+        status: 'COMPLETED',
+        homeActual: 4,
+        awayActual: 1,
+        matchday: 'Group Stage • Preview'
+      },
+      {
+        id: 96,
+        homeTeam: 'England',
+        homeFlag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+        awayTeam: 'Tunisia',
+        awayFlag: '🇹🇳',
+        date: 'Jun 08, 2026 - 19:00',
+        timestamp: Date.now() - 432000000,
+        status: 'COMPLETED',
+        homeActual: 2,
+        awayActual: 0,
+        matchday: 'Group Stage • Preview'
+      }
+    ];
+
+    // Seed Initial Bot Friend Predictions for complete historical realism
+    const DEFAULT_BOT_PREDICTIONS = {
+      alex: { 100: [2, 1], 99: [2, 0], 98: [1, 2], 97: [3, 0], 96: [2, 0], 101: [2, 0], 102: [1, 1], 103: [1, 0] },
+      sarah: { 100: [1, 1], 99: [3, 1], 98: [2, 2], 97: [4, 1], 96: [1, 0], 101: [1, 0], 102: [2, 1], 103: [2, 2] },
+      omar: { 100: [3, 0], 99: [1, 0], 98: [0, 1], 97: [2, 0], 96: [3, 0], 101: [3, 1], 102: [0, 2], 103: [0, 1] },
+      mateo: { 100: [2, 1], 99: [2, 1], 98: [1, 1], 97: [1, 0], 96: [2, 1], 101: [0, 0], 102: [1, 0], 103: [2, 1] },
+      elena: { 100: [0, 2], 99: [3, 1], 98: [2, 2], 97: [3, 1], 96: [2, 0], 101: [2, 1], 102: [3, 1], 103: [1, 1] }
+    };
+
+    const DEFAULT_USER_PREDICTIONS = {
+      100: [2, 1], // Exact match (3 pts)
+      99: [3, 1],  // Exact match (3 pts)
+      98: [2, 2],  // Exact match (3 pts)
+      97: [2, 0],  // Correct winner (1 pt)
+      96: [2, 0],  // Exact match (3 pts)
+      101: [2, 1], // Upcoming user pick
+      102: [1, 0]  // Upcoming user pick
+    };
+
+    const DEFAULT_ACTIVITIES = [
+      { id: 1, text: "Elena predicted Mexico 2 - 1 South Africa", time: "10m ago" },
+      { id: 2, text: "Sarah gained +3 pts from France vs Australia", time: "1h ago" },
+      { id: 3, text: "Ismail climbed to 1st place in Group A!", time: "2h ago" },
+      { id: 4, text: "Alex predicted USA 1 - 1 Serbia", time: "4h ago" }
+    ];
+
+    // State Holders
+    let matches = [];
+    let userPredictions = {};
+    let botPredictions = {};
+    let players = [];
+    let activityLogs = [];
+    let settings = { deadlineReminders: true, resultNotifications: true, soundEffects: true };
+    let currentFilter = 'all';
+
+    // --- Core Initialization ---
+    window.onload = function() {
+      loadStorageData();
+      renderAll();
+      startCountdownTimer();
+    };
+
+    function loadStorageData() {
+      try {
+        const savedMatches = localStorage.getItem('wc26_matches');
+        matches = savedMatches ? JSON.parse(savedMatches) : DEFAULT_MATCHES;
+
+        const savedUserPreds = localStorage.getItem('wc26_user_preds');
+        userPredictions = savedUserPreds ? JSON.parse(savedUserPreds) : DEFAULT_USER_PREDICTIONS;
+
+        const savedBotPreds = localStorage.getItem('wc26_bot_preds');
+        botPredictions = savedBotPreds ? JSON.parse(savedBotPreds) : DEFAULT_BOT_PREDICTIONS;
+
+        const savedPlayers = localStorage.getItem('wc26_players');
+        players = savedPlayers ? JSON.parse(savedPlayers) : DEFAULT_PLAYERS;
+
+        const savedActivities = localStorage.getItem('wc26_activities');
+        activityLogs = savedActivities ? JSON.parse(savedActivities) : DEFAULT_ACTIVITIES;
+
+        const savedSettings = localStorage.getItem('wc26_settings');
+        if (savedSettings) settings = JSON.parse(savedSettings);
+      } catch (e) {
+        console.error("Failed loading state, resetting to defaults", e);
+        matches = DEFAULT_MATCHES;
+        userPredictions = DEFAULT_USER_PREDICTIONS;
+        botPredictions = DEFAULT_BOT_PREDICTIONS;
+        players = DEFAULT_PLAYERS;
+        activityLogs = DEFAULT_ACTIVITIES;
+      }
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem('wc26_matches', JSON.stringify(matches));
+        localStorage.setItem('wc26_user_preds', JSON.stringify(userPredictions));
+        localStorage.setItem('wc26_bot_preds', JSON.stringify(botPredictions));
+        localStorage.setItem('wc26_players', JSON.stringify(players));
+        localStorage.setItem('wc26_activities', JSON.stringify(activityLogs));
+        localStorage.setItem('wc26_settings', JSON.stringify(settings));
+      } catch(e) {
+        console.error("Storage save failed", e);
+      }
+    }
+
+    // --- Dynamic Point Calculation Engine ---
+    function calculatePlayerScores() {
+      // Returns list of player stats calculated against completed matches
+      const completedMatches = matches.filter(m => m.status === 'COMPLETED');
+
+      return players.map(player => {
+        let totalPts = 0;
+        let exactCount = 0;
+        let correctOutcomeCount = 0;
+
+        const playerPreds = player.isUser ? userPredictions : (botPredictions[player.id] || {});
+
+        completedMatches.forEach(m => {
+          const pred = playerPreds[m.id];
+          if (pred && Array.isArray(pred) && pred[0] !== null && pred[1] !== null) {
+            const [pHome, pAway] = pred;
+            const aHome = m.homeActual;
+            const aAway = m.awayActual;
+
+            // 1. Exact score match = 3 pts
+            if (pHome === aHome && pAway === aAway) {
+              totalPts += 3;
+              exactCount++;
+            } else {
+              // 2. Correct outcome (winner or draw) = 1 pt
+              const predOutcome = Math.sign(pHome - pAway);
+              const actualOutcome = Math.sign(aHome - aAway);
+
+              if (predOutcome === actualOutcome) {
+                totalPts += 1;
+                correctOutcomeCount++;
+              }
+            }
+          }
+        });
+
+        return {
+          ...player,
+          points: totalPts,
+          exactCount: exactCount,
+          correctOutcomeCount: correctOutcomeCount
+        };
+      }).sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        if (b.exactCount !== a.exactCount) return b.exactCount - a.exactCount;
+        return b.correctOutcomeCount - a.correctOutcomeCount;
+      });
+    }
+
+    // --- Master Render Coordinator ---
+    function renderAll() {
+      const playerStats = calculatePlayerScores();
+      const currentUserStats = playerStats.find(p => p.isUser) || { points: 0, exactCount: 0 };
+      const userRank = playerStats.findIndex(p => p.isUser) + 1;
+
+      // Update Header & Profile User Stats
+      document.getElementById('stat-total-players').innerText = players.length;
+      document.getElementById('stat-total-matches').innerText = matches.length;
+      document.getElementById('stat-user-points').innerText = currentUserStats.points;
+      document.getElementById('hero-user-rank').innerText = `Rank #${userRank}`;
+      document.getElementById('profile-points').innerText = currentUserStats.points;
+      document.getElementById('profile-exact-count').innerText = currentUserStats.exactCount;
+      
+      const userObj = players.find(p => p.isUser);
+      if (userObj) {
+        document.getElementById('username-input').value = userObj.name;
+        document.getElementById('profile-avatar-display').innerText = userObj.avatar;
+      }
+
+      renderFeaturedMatch();
+      renderMatchesList();
+      renderStandingsTable(playerStats);
+      renderActivityFeed();
+      renderEmojiPicker();
+    }
+
+    // --- Screen Tab Switcher ---
+    function switchTab(tabId) {
+      const screens = ['home', 'matches', 'standings', 'profile'];
+      
+      screens.forEach(s => {
+        const scrEl = document.getElementById(`screen-${s}`);
+        const navEl = document.getElementById(`nav-${s}`);
+        
+        if (s === tabId) {
+          scrEl.classList.remove('hidden');
+          navEl.classList.add('text-brand-500');
+          navEl.classList.remove('text-slate-400');
+        } else {
+          scrEl.classList.add('hidden');
+          navEl.classList.remove('text-brand-500');
+          navEl.classList.add('text-slate-400');
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- Featured Match Renderer (Home) ---
+    function renderFeaturedMatch() {
+      const container = document.getElementById('featured-match-container');
+      const upcomingMatches = matches.filter(m => m.status === 'UPCOMING');
+      const featured = upcomingMatches[0] || matches[0];
+
+      if (!featured) return;
+
+      const userPred = userPredictions[featured.id] || [0, 0];
+
+      container.innerHTML = `
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[10px] text-brand-500 font-bold uppercase tracking-wider">${featured.matchday}</span>
+          <span class="text-[10px] text-slate-400 font-mono">${featured.date}</span>
+        </div>
+        <div class="flex items-center justify-between py-2">
+          <div class="flex items-center space-x-2 w-5/12">
+            <span class="text-2xl">${featured.homeFlag}</span>
+            <span class="font-bold text-xs text-white truncate">${featured.homeTeam}</span>
+          </div>
+          <div class="text-center font-extrabold text-sm text-amber-400 px-2 bg-slate-800/80 rounded-lg py-1 border border-slate-700">
+            VS
+          </div>
+          <div class="flex items-center space-x-2 w-5/12 justify-end">
+            <span class="font-bold text-xs text-white truncate">${featured.awayTeam}</span>
+            <span class="text-2xl">${featured.awayFlag}</span>
+          </div>
+        </div>
+        <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300">
+          <span>Your Pick: <strong class="text-brand-500">${userPred[0]} - ${userPred[1]}</strong></span>
+          <button onclick="switchTab('matches')" class="text-brand-500 font-bold hover:underline">Edit Pick &rarr;</button>
+        </div>
+      `;
+    }
+
+    // --- Match Cards Renderer (Matches Tab) ---
+    function filterMatches(type) {
+      currentFilter = type;
+      ['all', 'upcoming', 'completed'].forEach(f => {
+        const btn = document.getElementById(`filter-${f}`);
+        if (f === type) {
+          btn.className = "px-2.5 py-1 rounded-lg font-semibold bg-brand-500 text-slate-950 transition";
+        } else {
+          btn.className = "px-2.5 py-1 rounded-lg font-semibold text-slate-400 hover:text-white transition";
+        }
+      });
+      renderMatchesList();
+    }
+
+    function renderMatchesList() {
+      const container = document.getElementById('matchList');
+      container.innerHTML = '';
+
+      let filtered = matches;
+      if (currentFilter === 'upcoming') filtered = matches.filter(m => m.status === 'UPCOMING');
+      if (currentFilter === 'completed') filtered = matches.filter(m => m.status === 'COMPLETED');
+
+      filtered.forEach(m => {
+        const isUpcoming = m.status === 'UPCOMING';
+        const userPred = userPredictions[m.id] || [0, 0];
+
+        // Points evaluation for completed matches
+        let pointsEarnedHtml = '';
+        if (m.status === 'COMPLETED') {
+          const [pH, pA] = userPred;
+          const aH = m.homeActual;
+          const aA = m.awayActual;
+
+          if (pH === aH && pA === aA) {
+            pointsEarnedHtml = `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded-full text-[10px] font-bold">🎯 +3 Pts (Exact)</span>`;
+          } else if (Math.sign(pH - pA) === Math.sign(aH - aA)) {
+            pointsEarnedHtml = `<span class="bg-brand-500/20 text-brand-500 border border-brand-500/40 px-2 py-0.5 rounded-full text-[10px] font-bold">✅ +1 Pt (Outcome)</span>`;
+          } else {
+            pointsEarnedHtml = `<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2 py-0.5 rounded-full text-[10px] font-bold">❌ 0 Pts</span>`;
+          }
+        }
+
+        const card = document.createElement('div');
+        card.className = "glass-card rounded-3xl p-4 border border-slate-800 space-y-3 relative overflow-hidden transition hover:border-slate-700";
+
+        card.innerHTML = `
+          <div class="flex justify-between items-center text-xs">
+            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">${m.matchday}</span>
+            <div class="flex items-center gap-2">
+              ${m.status === 'COMPLETED' ? '<span class="text-[10px] bg-slate-800 text-slate-300 font-bold px-2 py-0.5 rounded-full">FINAL</span>' : '<span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded-full animate-pulse">UPCOMING</span>'}
+              ${pointsEarnedHtml}
+            </div>
+          </div>
+
+          <!-- Teams and Scores Input -->
+          <div class="grid grid-cols-7 items-center gap-2 py-1">
+            
+            <!-- Home Team -->
+            <div class="col-span-3 flex items-center space-x-2">
+              <span class="text-2xl">${m.homeFlag}</span>
+              <span class="font-bold text-xs text-white truncate">${m.homeTeam}</span>
+            </div>
+
+            <!-- Score Controls or Completed Score -->
+            <div class="col-span-1 flex items-center justify-center">
+              ${isUpcoming ? `
+                <input type="number" min="0" max="15" id="pred-${m.id}-home" value="${userPred[0]}" 
+                  class="w-10 h-10 bg-slate-900 border border-slate-700 rounded-xl text-center font-black text-brand-500 text-base focus:outline-none focus:border-brand-500">
+              ` : `
+                <span class="font-black text-xl text-white">${m.homeActual}</span>
+              `}
+            </div>
+
+            ${isUpcoming ? `
+              <div class="col-span-1 flex items-center justify-center">
+                <input type="number" min="0" max="15" id="pred-${m.id}-away" value="${userPred[1]}" 
+                  class="w-10 h-10 bg-slate-900 border border-slate-700 rounded-xl text-center font-black text-brand-500 text-base focus:outline-none focus:border-brand-500">
+              </div>
+            ` : `
+              <div class="col-span-1 text-center font-bold text-slate-500 text-xs">FT</div>
+              <div class="col-span-1 flex items-center justify-center">
+                <span class="font-black text-xl text-white">${m.awayActual}</span>
+              </div>
+            `}
+
+            <!-- Away Team -->
+            <div class="col-span-3 flex items-center justify-end space-x-2 text-right">
+              <span class="font-bold text-xs text-white truncate">${m.awayTeam}</span>
+              <span class="text-2xl">${m.awayFlag}</span>
+            </div>
+          </div>
+
+          <!-- Card Bottom Bar -->
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/60 text-xs">
+            <span class="text-[11px] text-slate-400 font-mono">${m.date}</span>
+            ${isUpcoming ? `
+              <button onclick="savePrediction(${m.id})" class="bg-brand-500/20 hover:bg-brand-500 text-brand-400 hover:text-slate-950 border border-brand-500/40 px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1">
+                <span>💾</span> Save Pick
+              </button>
+            ` : `
+              <span class="text-[10px] text-slate-400">Your Prediction: <b class="text-slate-200">${userPred[0]} - ${userPred[1]}</b></span>
+            `}
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Save Prediction Handler
+    function savePrediction(matchId) {
+      const homeVal = parseInt(document.getElementById(`pred-${matchId}-home`).value) || 0;
+      const awayVal = parseInt(document.getElementById(`pred-${matchId}-away`).value) || 0;
+
+      userPredictions[matchId] = [homeVal, awayVal];
+      saveData();
+      renderAll();
+
+      const matchObj = matches.find(m => m.id === matchId);
+      const matchName = matchObj ? `${matchObj.homeTeam} vs ${matchObj.awayTeam}` : 'Match';
+      
+      showToast(`Prediction saved for ${matchName}! (${homeVal} - ${awayVal})`, '⚽');
+
+      // Add to Activity Feed
+      const userObj = players.find(p => p.isUser);
+      activityLogs.unshift({
+        id: Date.now(),
+        text: `${userObj ? userObj.name : 'Ismail'} predicted ${matchObj ? matchObj.homeTeam : ''} ${homeVal} - ${awayVal} ${matchObj ? matchObj.awayTeam : ''}`,
+        time: "Just now"
+      });
+      if (activityLogs.length > 8) activityLogs.pop();
+      saveData();
+      renderActivityFeed();
+    }
+
+    // --- Dynamic Standings Leaderboard Renderer ---
+    function renderStandingsTable(playerStats) {
+      const tbody = document.getElementById('table');
+      tbody.innerHTML = '';
+
+      playerStats.forEach((p, index) => {
+        const rank = index + 1;
+        const tr = document.createElement('tr');
+        
+        let rankBadgeClass = "bg-slate-800 text-slate-400";
+        if (rank === 1) rankBadgeClass = "bg-amber-400 text-slate-950 font-black gold-glow";
+        if (rank === 2) rankBadgeClass = "bg-slate-300 text-slate-950 font-bold";
+        if (rank === 3) rankBadgeClass = "bg-amber-700/80 text-white font-bold";
+
+        tr.className = p.isUser 
+          ? "bg-brand-500/10 border-l-4 border-l-brand-500 transition hover:bg-brand-500/15" 
+          : "hover:bg-slate-800/40 transition";
+
+        tr.innerHTML = `
+          <td class="py-3.5 px-4 text-center">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-[11px] ${rankBadgeClass}">
+              ${rank}
+            </span>
+          </td>
+          <td class="py-3.5 px-3">
+            <div class="flex items-center space-x-2">
+              <span class="text-base">${p.avatar}</span>
+              <span class="font-bold text-white ${p.isUser ? 'text-brand-400' : ''}">${p.name} ${p.isUser ? '(You)' : ''}</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-2 text-center font-semibold text-amber-400">${p.exactCount}</td>
+          <td class="py-3.5 px-2 text-center font-semibold text-slate-300">${p.correctOutcomeCount}</td>
+          <td class="py-3.5 px-4 text-right">
+            <span class="font-black text-sm text-brand-500">${p.points}</span>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // --- Activity Feed Renderer ---
+    function renderActivityFeed() {
+      const container = document.getElementById('activity-feed');
+      container.innerHTML = '';
+
+      activityLogs.slice(0, 4).forEach(act => {
+        const item = document.createElement('div');
+        item.className = "bg-slate-900/60 border border-slate-800/80 rounded-2xl p-3 flex items-center justify-between text-xs";
+        item.innerHTML = `
+          <div class="flex items-center space-x-2.5">
+            <span class="text-sm">📌</span>
+            <span class="text-slate-300 font-medium">${act.text}</span>
+          </div>
+          <span class="text-[10px] text-slate-500 font-mono">${act.time}</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // --- Avatar Emoji Picker ---
+    function renderEmojiPicker() {
+      const container = document.getElementById('emoji-picker');
+      container.innerHTML = '';
+
+      const userObj = players.find(p => p.isUser);
+      const currentAvatar = userObj ? userObj.avatar : '🦁';
+
+      EMOJI_OPTIONS.forEach(emoji => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `w-10 h-10 rounded-xl text-xl flex items-center justify-center transition border ${emoji === currentAvatar ? 'bg-brand-500/20 border-brand-500 scale-105' : 'bg-slate-900 border-slate-800 hover:border-slate-700'}`;
+        btn.innerText = emoji;
+        btn.onclick = () => {
+          if (userObj) userObj.avatar = emoji;
+          saveData();
+          renderAll();
+          showToast(`Avatar updated to ${emoji}!`, '✨');
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    // --- Save Profile Settings ---
+    function saveProfileSettings() {
+      const newName = document.getElementById('username-input').value.trim();
+      if (newName) {
+        const userObj = players.find(p => p.isUser);
+        if (userObj) userObj.name = newName;
+      }
+
+      settings.deadlineReminders = document.getElementById('setting-deadline-reminders').checked;
+      settings.resultNotifications = document.getElementById('setting-result-notifications').checked;
+      settings.soundEffects = document.getElementById('setting-sound-effects').checked;
+
+      saveData();
+      renderAll();
+      showToast('Profile and notification settings saved!', '✅');
+    }
+
+    // --- Match Simulator Feature (Simulate Dynamic Progression) ---
+    function triggerSimulateMatch() {
+      const upcoming = matches.filter(m => m.status === 'UPCOMING');
+      
+      if (upcoming.length === 0) {
+        openModal('All Matches Finished!', 'All matches in this current tournament round have been simulated and completed.', '🏆');
+        return;
+      }
+
+      // Pick next match and simulate realistic random result
+      const matchToSim = upcoming[0];
+      const randomHome = Math.floor(Math.random() * 4);
+      const randomAway = Math.floor(Math.random() * 3);
+
+      matchToSim.status = 'COMPLETED';
+      matchToSim.homeActual = randomHome;
+      matchToSim.awayActual = randomAway;
+
+      activityLogs.unshift({
+        id: Date.now(),
+        text: `FULL TIME: ${matchToSim.homeTeam} ${randomHome} - ${randomAway} ${matchToSim.awayTeam}`,
+        time: "Just now"
+      });
+
+      saveData();
+      renderAll();
+
+      openModal(
+        'Match Simulation Complete! ⚽',
+        `Simulated Score: ${matchToSim.homeTeam} ${randomHome} - ${randomAway} ${matchToSim.awayTeam}.\nCheck the Standings to see updated point totals!`,
+        '⚡'
+      );
+    }
+
+    // --- Live Countdown Timer for Next Upcoming Match ---
+    function startCountdownTimer() {
+      function updateTimer() {
+        const upcoming = matches.filter(m => m.status === 'UPCOMING');
+        if (upcoming.length === 0) {
+          document.getElementById('countdown-timer').innerText = 'Round Complete';
+          return;
+        }
+
+        const now = Date.now();
+        const diff = upcoming[0].timestamp - now;
+
+        if (diff <= 0) {
+          document.getElementById('countdown-timer').innerText = 'LIVE NOW';
+          return;
+        }
+
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('countdown-timer').innerText = 
+          `${String(hours).padStart(2, '0')}h : ${String(minutes).padStart(2, '0')}m : ${String(seconds).padStart(2, '0')}s`;
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
+    // --- Helper Functions (Toast, Clipboard & Modal) ---
+    function copyInviteCode() {
+      const code = document.getElementById('invite-code').innerText;
+      
+      // Fallback copy for safe execution
+      const tempInput = document.createElement('input');
+      tempInput.value = code;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      showToast('Invite code copied to clipboard!', '📋');
+    }
+
+    function showToast(msg, icon = '✨') {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      document.getElementById('toast-icon').innerText = icon;
+
+      toast.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3000);
+    }
+
+    function openModal(title, body, icon = '🏆') {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-body').innerText = body;
+      document.getElementById('modal-icon').innerText = icon;
+      document.getElementById('modal-overlay').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+    }
+
+    function resetDataToDefaults() {
+      if (confirm("Reset all predictions and match standings to initial demo state?")) {
+        localStorage.clear();
+        loadStorageData();
+        renderAll();
+        showToast('App state successfully reset!', '🔄');
+      }
+    }
+  </script>
+</body>
+</html>
